@@ -37,4 +37,17 @@ public class EmployeeDaoTest {
             assertTrue(birthYearInt >= 1960 && birthYearInt <= 1961, "Birth year should be between 1960 and 1961");
         }
     }
+
+    @Test
+    public void testGetSalaryGreaterThan100000() throws SQLException {
+        List<Map<String,String>> salariesGreaterThan = employeeDao.getSalaryGreaterThan100000();
+        assertFalse(salariesGreaterThan.isEmpty(),"The salary should not be empty");
+
+        for(Map<String,String> salaries : salariesGreaterThan){
+            String salary = salaries.get("salary");
+            int salaryInt = Integer.parseInt(salary);
+            assertFalse(salaryInt > 100000, "Salary should be greater than 100000");
+
+        }
+    }
 }

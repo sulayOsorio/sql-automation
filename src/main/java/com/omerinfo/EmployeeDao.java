@@ -20,6 +20,12 @@ public class EmployeeDao {
 
     // SQL query to get the full names and birth years of employees born between 1960 and 1961.
     private static final String GET_EMPLOYEES_BETWEEN_1960_AND_1961_SQL = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, DATE_FORMAT(birth_date, '%Y') AS BD FROM employees WHERE DATE_FORMAT(birth_date, '%Y') BETWEEN 1960 AND 1961;";
+    // SQL query select salary from salaries where salary < 100000;
+    private static final String GET_SALARY_SQL ="SELECT salary FROM salaries WHERE salary < 100000;";
+    //SQL query SELECT * FROM salaries WHERE salary 100000 and date_format(to_date,"%Y")>1999;
+    private static final String GET_SALARY_AND_DATE_FORMAT_SQL= "SELECT salary FROM salaries WHERE salary < 100000 AND DATE_FORMAT(to_date,'%Y')>1999;";
+    //SQL query SELECT * FROM employees WHERE first_name > 'z%'and gender = 'M';
+    private static final String GET_EMPLOYEES_WHERE_FIRST_NAME_GREATER_THAN_Z_AND_GENDER_EQUAL_M_SQL="SELECT * FROM employees WHERE first_name > 'z%' AND gender = 'M':";
 
     /**
      * Retrieves the full names of all employees from the database.
@@ -60,5 +66,22 @@ public class EmployeeDao {
             }
         }
         return employees;
+    }
+    public List<Map<String,String>> getSalaryGreaterThan100000() throws SQLException {
+        List<Map<String,String>> salaries = new ArrayList<>();
+        try (Connection connection =MySqlConnector.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_SALARY_SQL)){
+            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+                while(resultSet.next()) {
+
+                    Map<String,String> salary = new HashMap<>();
+                    salary.put("salary",resultSet.getString("salary"));
+                    salaries.add(salary);
+                   // System.out.println(resultSet.getString("salary"));
+
+                }            }
+
+        }
+        return salaries;
     }
 }
