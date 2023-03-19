@@ -67,10 +67,16 @@ public class EmployeeDaoTest {
         assertFalse(employeesWhereFirstNameGreaterThanZAndGenderEqualM.isEmpty(),"The employee list should not be empty");
 
         for(Map<String,String> employees : employeesWhereFirstNameGreaterThanZAndGenderEqualM){
-            String firs_name = employees.get("first_name");
+            String first_name = employees.get("first_name");
+            String lastName = employees.get("last_name");
             String gender = employees.get("gender");
-            assertFalse(firs_name.isEmpty(), "Full name should not be empty");
+            String employeeNumber = employees.get("emp_no");
+            assertFalse(first_name.isEmpty(), "Full name should not be empty");
+            assertFalse(lastName.isEmpty(), "Last name should not be empty");
             assertFalse(gender.isEmpty(), "Gender should not be empty");
+            assertFalse(employeeNumber.isEmpty(), "Employee number should not be empty");
+            assertEquals('z', first_name.toLowerCase().charAt(0), "First name should starts with letter 'z'");
+            assertEquals("M", gender.trim(), "Gender should be a male");
         }
 
     }

@@ -99,6 +99,24 @@ public class EmployeeDao {
         }
         return salaries;
     }
+    //                    employee.put("emp_no", resultSet.getString("emp_no"));
+    //                    employee.put("birth_date", resultSet.getString("birth_date"));
+    //                    employee.put("first_name", resultSet.getString("first_name"));
+    //                    employee.put("last_name", resultSet.getString("last_name"));
+    //                    employee.put("gender", resultSet.getString("gender"));
+    //                    employee.put("hire_date", resultSet.getString("hire_date"));
+    //                    	employees.add(employee);
+    //                }
+    //            }
+    //        }
+    //        return employees;
+    //    }
+    /**
+     //     * Retrieves male employees with first name starts from "Z".
+     //     *
+     //     * @return A list of maps containing employee numbers, birth date, first name, last name, gender and hire date.
+     //     * @throws SQLException If there is an issue executing the SQL query.
+     //     */
     public List<Map<String,String>> getEmployeesWhereFirstNameGreaterThanZAndGenderEqualM() throws SQLException {
         List<Map<String,String>> employees = new ArrayList<>();
         try (Connection connection = MySqlConnector.getConnection();
@@ -107,7 +125,9 @@ public class EmployeeDao {
                 while (resultSet.next()){
                     Map<String,String> employee = new HashMap<>();
                     employee.put("first_name",resultSet.getString("first_name"));
+                    employee.put("last_name", resultSet.getString("last_name"));
                     employee.put("gender",resultSet.getString("gender"));
+                    employee.put("emp_no", resultSet.getString("emp_no"));
                     employees.add(employee);
                 }
             }
