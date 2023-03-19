@@ -50,4 +50,28 @@ public class EmployeeDaoTest {
 
         }
     }
+    @Test
+    public void testGetSalaryGreaterThan100000AndDateFormate() throws SQLException {
+        List<Map<String,String>> salariesGreaterThanAndDateFormate= employeeDao.getSalaryGreaterThan100000AndDateFormate();
+        assertFalse(salariesGreaterThanAndDateFormate.isEmpty(),"The salary should not be empty");
+
+        for(Map<String,String> salaries : salariesGreaterThanAndDateFormate){
+            String salary = salaries.get("salary");
+            int salaryInt = Integer.parseInt(salary);
+            assertFalse(salaryInt > 100000, "Salary should be greater than 100000");
+        }
+    }
+    @Test
+    public void testGetEmployeesWhereFirstNameGreaterThanZAndGenderEqualM() throws SQLException {
+        List<Map<String,String>> employeesWhereFirstNameGreaterThanZAndGenderEqualM = employeeDao.getEmployeesWhereFirstNameGreaterThanZAndGenderEqualM();
+        assertFalse(employeesWhereFirstNameGreaterThanZAndGenderEqualM.isEmpty(),"The employee list should not be empty");
+
+        for(Map<String,String> employees : employeesWhereFirstNameGreaterThanZAndGenderEqualM){
+            String firs_name = employees.get("first_name");
+            String gender = employees.get("gender");
+            assertFalse(firs_name.isEmpty(), "Full name should not be empty");
+            assertFalse(gender.isEmpty(), "Gender should not be empty");
+        }
+
+    }
 }
